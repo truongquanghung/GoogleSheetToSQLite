@@ -8,7 +8,8 @@ def make_table(link, name):
     try:
         # Download data form Google Sheet to csv file 
         segments = link.rpartition('/')
-        link = segments[0] + "/export?format=csv"
+        gid = link.rpartition('gid')
+        link = segments[0] + "/export?format=csv&gid" + gid[2]
         csv_content = pd.read_csv(link)
         buffer = StringIO()  #creating an empty buffer
         csv_content.to_csv(buffer, index=False)  #filling that buffer
